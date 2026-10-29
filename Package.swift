@@ -13,16 +13,24 @@ let package = Package(
     targets: [
         .target(
             name: "NetworkingTypes",
-            swiftSettings: [
-                .enableUpcomingFeature("ApproachableConcurrency")
-            ],
+            swiftSettings: swiftSettings,
         ),
         .testTarget(
             name: "NetworkingTypesTests",
             dependencies: ["NetworkingTypes"],
-            swiftSettings: [
-                .enableUpcomingFeature("ApproachableConcurrency")
-            ],
+            swiftSettings: swiftSettings,
         ),
     ]
 )
+
+var swiftSettings: [SwiftSetting] {
+    [
+        .swiftLanguageMode(.v6),
+        .strictMemorySafety(),
+        .enableUpcomingFeature("ApproachableConcurrency"),
+        .enableUpcomingFeature("MemberImportVisibility"),
+        .enableUpcomingFeature("InternalImportsByDefault"),
+        .enableUpcomingFeature("ExistentialAny"),
+        .treatAllWarnings(as: .error),
+    ]
+}
